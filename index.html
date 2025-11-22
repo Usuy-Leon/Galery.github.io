@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +7,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
+        /* ============================================================
+            THEME VARIABLES 
+        ============================================================ */
+        :root {
+            --bg: #000;
+            --text: #fff;
+            --btn-bg: rgba(0,0,0,0.6);
+            --modal-bg: rgba(0,0,0,0.55);
+            --modal-content-bg: rgba(255,255,255,0.06);
+        }
+        html[data-theme="dark"] {
+            /* Since the base is dark (black background), 'dark' mode is subtle here */
+            --bg: #000;
+            --text: #fff;
+            --btn-bg: rgba(0,0,0,0.75);
+            --modal-bg: rgba(0,0,0,0.65);
+            --modal-content-bg: rgba(0,0,0,0.1);
+        }
+        /* ============================================================
+            BASE STYLES
+        ============================================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { width: 100%; height: 100%; font-family: Arial, sans-serif; }
-        body { background: #000; overflow: hidden; }
+        body { background: var(--bg); overflow: hidden; transition: background 0.3s; }
 
         /* SLIDER */
         .slider { position: relative; width: 100%; height: 100vh; overflow: hidden; }
@@ -22,35 +43,59 @@
             position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
             padding: 12px 20px; background: rgba(0,0,0,0.35); color: white; border-radius: 8px;
             font-size: 1.2rem; text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 12px rgba(255,255,255,0.04);
+            max-width: 90%;
+            text-align: center;
         }
 
-        /* NAV */
-        .nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 24px; color: white;
-            background: rgba(0,0,0,0.45); border: none; padding: 10px 12px; border-radius: 50%; cursor: pointer; z-index: 50;
+        /* NAV BUTTONS (Side Arrows) - INCREASED SIZE FOR EASIER TAPPING */
+        .nav { 
+            position: absolute; top: 50%; transform: translateY(-50%); font-size: 28px; /* Slightly larger icon */
+            color: white;
+            background: rgba(0,0,0,0.45); border: none; 
+            padding: 18px 20px; /* INCREASED PADDING for larger button area */ 
+            border-radius: 50%; cursor: pointer; z-index: 50;
+            transition: background 0.2s, transform 0.2s; /* Add transform for hover effect */
         }
-        .prev { left: 12px; } .next { right: 12px; }
+        .nav:hover { 
+            background: rgba(0,0,0,0.7); 
+            transform: translateY(-50%) scale(1.08); /* Subtle animation */
+        }
+        .prev { left: 16px; } /* Slightly moved off the edge */
+        .next { right: 16px; } /* Slightly moved off the edge */
 
-        /* TOP BUTTONS */
+        /* TOP BUTTONS (Home, Gallery, Theme) */
         .top-buttons { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); display:flex; gap:12px; z-index:4000; transition: opacity 0.35s ease, transform 0.35s ease; }
-        .top-btn { background: rgba(0,0,0,0.6); color: #fff; border: none; padding: 10px 12px; border-radius: 50%; font-size: 16px; backdrop-filter: blur(6px); cursor: pointer; }
-        .top-btn:hover { transform: scale(1.08); }
+        .top-btn { 
+            background: var(--btn-bg); 
+            color: var(--text); 
+            border: none; padding: 10px 12px; border-radius: 50%; font-size: 16px; 
+            backdrop-filter: blur(6px); cursor: pointer; transition: transform 0.2s, background 0.3s; 
+        }
+        .top-btn:hover { transform: scale(1.1); background: rgba(255, 255, 255, 0.15); }
 
-        /* Modal (gallery) */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.45s ease; z-index: 4500; }
+        /* Modal (Gallery) */
+        .modal { display: none; position: fixed; inset: 0; background: var(--modal-bg); backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.45s ease; z-index: 4500; }
         .modal.show { display: block; }
-        .modal-content { width: 92%; max-width: 980px; margin: 60px auto; background: rgba(255,255,255,0.06); backdrop-filter: blur(14px); padding: 18px; border-radius: 12px; transform: scale(0.95); opacity: 0; transition: all 0.35s ease; color: #fff; }
+        .modal-content { 
+            width: 92%; max-width: 980px; margin: 60px auto; 
+            background: var(--modal-content-bg); 
+            backdrop-filter: blur(14px); padding: 18px; border-radius: 12px; 
+            transform: scale(0.95); opacity: 0; transition: all 0.35s ease; color: var(--text); 
+        }
         .modal-content.open { transform: scale(1); opacity: 1; }
-        .modal .close { position: absolute; top: 18px; right: 22px; font-size: 26px; color: #fff; cursor: pointer; }
+        .modal .close { position: absolute; top: 18px; right: 22px; font-size: 26px; color: var(--text); cursor: pointer; transition: color 0.2s; }
+        .modal .close:hover { color: #f00; }
 
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:12px; }
-        .gallery-item { overflow: hidden; border-radius: 8px; }
+        .gallery-item { overflow: hidden; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; }
+        .gallery-item:hover { border-color: #fff; }
         .gallery-item img { width: 100%; height: 140px; object-fit: cover; display:block; }
-        .gallery-item p { color:#fff; padding:8px 6px; font-size:14px; text-align:center; }
+        .gallery-item p { color:var(--text); padding:8px 6px; font-size:14px; text-align:center; background: rgba(0,0,0,0.2); }
 
         /* small screens tweaks */
         @media (max-width: 700px) {
             .caption { font-size: 1rem; padding: 10px 14px; }
-            .nav { font-size: 20px; padding: 8px 10px; }
+            .nav { font-size: 24px; padding: 14px 16px; } /* Increased size for mobile */
             .top-btn { padding: 8px 10px; font-size: 14px; }
             .gallery-item img { height: 110px; }
         }
@@ -59,15 +104,18 @@
 <body>
 
     <div class="top-buttons" id="topButtons">
-        <button id="homeBtn" class="top-btn" title="Home"><i class="fas fa-house"></i></button>
+        <button id="homeBtn" class="top-btn" title="Home"><i class="fas fa-house"></i></button> 
         <button id="galleryBtn" class="top-btn" title="Gallery"><i class="fas fa-images"></i></button>
         <button id="themeBtnTop" class="top-btn" title="Toggle theme"><i class="fas fa-circle-half-stroke"></i></button>
     </div>
 
     <div class="slider" id="slider">
-        <div class="slide active"><img src="https://picsum.photos/id/100/1600/900" alt="slide-1"><div class="caption">Forest path into the mist.</div></div>
-        <div class="slide"><img src="https://picsum.photos/id/237/1600/900" alt="slide-2"><div class="caption">A happy puppy in the morning light.</div></div>
-        <div class="slide"><img src="https://picsum.photos/id/220/1600/900" alt="slide-3"><div class="caption">City lights glowing beautifully.</div></div>
+        <div class="slide active" data-index="0"><img src="https://picsum.photos/id/100/1600/900" alt="slide-1"><div class="caption">Forest path into the mist.</div></div>
+        <div class="slide" data-index="1"><img src="https://picsum.photos/id/237/1600/900" alt="slide-2"><div class="caption">A happy puppy in the morning light.</div></div>
+        <div class="slide" data-index="2"><img src="https://picsum.photos/id/220/1600/900" alt="slide-3"><div class="caption">City lights glowing beautifully.</div></div>
+        <div class="slide" data-index="3"><img src="https://picsum.photos/id/10/1600/900" alt="slide-4"><div class="caption">Ocean Sunset.</div></div>
+        <div class="slide" data-index="4"><img src="https://picsum.photos/id/50/1600/900" alt="slide-5"><div class="caption">Mountain Peak.</div></div>
+        <div class="slide" data-index="5"><img src="https://picsum.photos/id/145/1600/900" alt="slide-6"><div class="caption">Desert Dune.</div></div>
     </div>
 
     <button class="nav prev" id="prevBtn" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
@@ -75,17 +123,130 @@
 
     <div id="galleryModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 style="margin-bottom:15px; text-align:center;">Image Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="https://picsum.photos/id/100/300/200" alt="Thumb 1"><p>Forest Path</p></div>
-                <div class="gallery-item"><img src="https://picsum.photos/id/237/300/200" alt="Thumb 2"><p>Happy Puppy</p></div>
-                <div class="gallery-item"><img src="https://picsum.photos/id/220/300/200" alt="Thumb 3"><p>City Lights</p></div>
-                <div class="gallery-item"><img src="https://picsum.photos/id/10/300/200" alt="Thumb 4"><p>Ocean Sunset</p></div>
-                <div class="gallery-item"><img src="https://picsum.photos/id/50/300/200" alt="Thumb 5"><p>Mountain Peak</p></div>
-                <div class="gallery-item"><img src="https://picsum.photos/id/145/300/200" alt="Thumb 6"><p>Desert Dune</p></div>
+            <span class="close" id="closeModal">&times;</span>
+            <h2 style="margin-bottom:15px; text-align:center; color:white;">Image Gallery</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-slide-index="0"><img src="https://picsum.photos/id/100/300/200" alt="Thumb 1"><p>Forest Path</p></div>
+                <div class="gallery-item" data-slide-index="1"><img src="https://picsum.photos/id/237/300/200" alt="Thumb 2"><p>Happy Puppy</p></div>
+                <div class="gallery-item" data-slide-index="2"><img src="https://picsum.photos/id/220/300/200" alt="Thumb 3"><p>City Lights</p></div>
+                <div class="gallery-item" data-slide-index="3"><img src="https://picsum.photos/id/10/300/200" alt="Thumb 4"><p>Ocean Sunset</p></div>
+                <div class="gallery-item" data-slide-index="4"><img src="https://picsum.photos/id/50/300/200" alt="Thumb 5"><p>Mountain Peak</p></div>
+                <div class="gallery-item" data-slide-index="5"><img src="https://picsum.photos/id/145/300/200" alt="Thumb 6"><p>Desert Dune</p></div>
             </div>
         </div>
     </div>
-    </body>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const galleryBtn = document.getElementById('galleryBtn');
+            const galleryModal = document.getElementById('galleryModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalContent = galleryModal.querySelector('.modal-content');
+            const galleryGrid = document.getElementById('galleryGrid');
+            const themeBtn = document.getElementById('themeBtnTop');
+            const html = document.documentElement;
+
+            let currentSlide = 0;
+            let touchStartX = 0;
+
+            // --- Core Slider Functions ---
+            function showSlide(index) {
+                // Wrap around logic
+                if (index >= slides.length) {
+                    currentSlide = 0;
+                } else if (index < 0) {
+                    currentSlide = slides.length - 1;
+                } else {
+                    currentSlide = index;
+                }
+
+                // Remove 'active' class from all slides
+                slides.forEach(slide => slide.classList.remove('active'));
+                
+                // Add 'active' class to the current slide
+                slides[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                showSlide(currentSlide - 1);
+            }
+
+            // --- Modal/Gallery Functions ---
+            function openModal() {
+                galleryModal.classList.add('show');
+                // Use a slight delay to allow the opacity transition before scaling
+                setTimeout(() => modalContent.classList.add('open'), 10);
+            }
+
+            function closeModalFunc() {
+                modalContent.classList.remove('open');
+                // Use a slight delay to allow the scale transition before hiding
+                setTimeout(() => galleryModal.classList.remove('show'), 350);
+            }
+
+            // --- Theme Toggle Function ---
+            function toggleTheme() {
+                const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', newTheme);
+                // The dark mode theme is subtle (mostly transparent effects changing)
+            }
+
+            // --- Event Listeners ---
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+            
+            galleryBtn.addEventListener('click', openModal);
+            closeModal.addEventListener('click', closeModalFunc);
+            // Close modal when clicking outside the content
+            galleryModal.addEventListener('click', (e) => {
+                if (e.target === galleryModal) {
+                    closeModalFunc();
+                }
+            });
+
+            galleryGrid.addEventListener('click', (e) => {
+                let item = e.target.closest('.gallery-item');
+                if (item) {
+                    const index = parseInt(item.getAttribute('data-slide-index'));
+                    showSlide(index);
+                    closeModalFunc();
+                }
+            });
+
+            themeBtn.addEventListener('click', toggleTheme);
+            
+            // --- Mobile Gesture (Swipe) Logic ---
+            const slider = document.getElementById('slider');
+            slider.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+
+            slider.addEventListener('touchend', (e) => {
+                if (!e.changedTouches || e.changedTouches.length === 0) return;
+                
+                const touchEndX = e.changedTouches[0].clientX;
+                const deltaX = touchEndX - touchStartX;
+                const threshold = 50; // Minimum distance for a swipe
+
+                if (deltaX > threshold) {
+                    // Swiped Right (go to previous slide)
+                    prevSlide();
+                } else if (deltaX < -threshold) {
+                    // Swiped Left (go to next slide)
+                    nextSlide();
+                }
+            });
+
+            // Initialize the first slide display
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
 </html>
