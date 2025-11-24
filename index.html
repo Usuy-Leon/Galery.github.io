@@ -181,13 +181,13 @@
 
         /* --- Gallery Grid Layout (Spacing Fix) --- */
         .gallery-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            margin-top: 40px;
             /* Added space above the pictures */
-            margin-top: 40px; 
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 20px;
             padding-bottom: 50px;
         }
 
@@ -344,7 +344,7 @@
     
         /* --- Responsive --- */
         @media only screen and (max-width: 768px) {
-            .gallery-container { grid-template-columns: repeat(2, 1fr); }
+            .gallery-container { grid-template-columns: 1fr; }
             #darkModeToggle { top: 30px; right: 10px; } /* Adjust position on smaller screens */
         }
         @media only screen and (max-width: 480px) {
