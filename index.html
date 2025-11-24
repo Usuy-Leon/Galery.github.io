@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MONK PARKER STYLE GALLERY</title>
+    <title>USUY GALLERY</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* --- CSS Reset and Base Styles --- */
         * {
@@ -16,12 +17,33 @@
             box-sizing: border-box;
         }
 
+
+/* --- 2. Theme Variables & Base Styles --- */
+        :root {
+            /* Light Mode Defaults */
+            --fg: #333; /* Foreground text color */
+            --bg: #f5f5f5; /* Background color */
+            --btn-border: #ccc;
+            --btn-bg: rgba(255, 255, 255, 0.7);
+            --font-serif: Georgia, serif; /* Placeholder font */
+        }
+
+        .dark-mode {
+            /* Dark Mode Variables */
+            --fg: #f5f5f5;
+            --bg: #1a1a1a;
+            --btn-border: #555;
+            --btn-bg: rgba(0, 0, 0, 0.7);
+        }
         body {
-            background-color: #000000;
-            color: #ffffff;
-            font-family: 'Lora', serif; /* Applied Lora globally */
+            background: var(--bg);
+            color: var(--fg);
+            transition: background 0.5s, color 0.5s;
+            min-height: 100vh;
+            margin: 0;
+            padding: 50px;
+            font-family: sans-serif;
             text-align: center;
-            padding: 20px;
         }
 
         /* --- Header Styling --- */
@@ -229,6 +251,29 @@
             z-index: 1002;
             font-family: sans-serif; /* Keep X symbol simple */
         }
+        /* --- 3. Dark Mode Toggle Button Styling 
+        #darkModeToggle {
+            /* Positioning for the right side */
+            position: fixed;
+            top: 20px; /* Distance from the top */
+            right: 20px; /* Distance from the right */
+            z-index: 1000;
+
+            /* Your requested button styles */
+            padding:0.25rem 0.7rem;
+            border-radius:999px; /* This creates the circular/pill shape */
+            border:1px solid var(--btn-border);
+            background:var(--btn-bg);
+            backdrop-filter:blur(10px);
+            color:var(--fg);
+            font-size: 1.1rem;
+            font-weight: 300;
+            cursor: pointer;
+            font-family: var(--font-serif);
+            transition: background 0.3s, border-color 0.3s, color 0.3s;
+            text-shadow: none;
+            outline: none;
+        }
 
         /* --- Responsive --- */
         @media only screen and (max-width: 768px) {
@@ -242,10 +287,12 @@
     </style>
 </head>
 <body>
-
+    <button id="darkModeToggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
     <header>
-        <h1>MONK PARKER</h1>
-        <h2>LOST WORLD RADIO</h2>
+        <h1>PERSONAL GALERY </h1>
+        <h2>WELCOME TO MY MICROSCOPIC WORLD</h2>
     </header>
 
     <div class="filter-container">
@@ -358,6 +405,48 @@
             });
         });
 
+        const toggleButton = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        // Function to update the icon based on the current mode
+        function updateIcon() {
+            const icon = toggleButton.querySelector('i');
+            if (body.classList.contains('dark-mode')) {
+                // If in dark mode, show the Sun icon (to switch to light mode)
+                icon.className = 'fas fa-sun';
+            } else {
+                // If in light mode, show the Moon icon (to switch to dark mode)
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // 1. Check for saved preference in localStorage on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        } else if (savedTheme === null) {
+            // 2. If no saved preference, check the system preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                 body.classList.add('dark-mode');
+            }
+        }
+
+        // Initialize the correct icon on load
+        updateIcon();
+
+        // 3. Handle click event
+        toggleButton.addEventListener('click', () => {
+            // Toggle the 'dark-mode' class
+            body.classList.toggle('dark-mode');
+
+            // Save the new preference
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
+            // Update the icon
+            updateIcon();
+        });
+ 
         // --- MODAL FUNCTIONALITY ---
         const modal = document.getElementById("myModal");
         const modalImg = document.getElementById("img01");
