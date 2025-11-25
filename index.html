@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MicroWorld</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* --- CSS Reset and Base Styles --- */
@@ -20,16 +22,19 @@
         /* --- 2. Theme Variables & Base Styles --- */
         :root {
             /* Text & Colors */
-            --fg: #333; /* Foreground text color */
+            --fg: #333;
+            /* Foreground text color */
             --muted: #a0a0a0;
-            
+
             /* Backgrounds & Contrast */
-            --bg: #f5f5f5; /* Fallback color for body */
+            --bg: #f5f5f5;
+            /* Fallback color for body */
             --bg-image: url('https://Usuy-Leon.github.io/home.github.io/Imagenes/☀️_dayLight_edition.jpg');
             --btn-bg: rgba(255, 255, 255, 0.7);
             --btn-border: rgba(0, 0, 0, 0.12);
-            --text-shadow: 0 0 4px rgba(255, 255, 255, 0.4), 0 0 2px rgba(0, 0, 0, 0.15); /* clarity for text */
-            
+            --text-shadow: 0 0 4px rgba(255, 255, 255, 0.4), 0 0 2px rgba(0, 0, 0, 0.15);
+            /* clarity for text */
+
             --font-serif: 'Lora', serif;
         }
 
@@ -38,23 +43,30 @@
             /* Text & Colors */
             --fg: #e0e0e0;
             --muted: #a0a0a0;
-            
+
             /* Backgrounds & Contrast */
-            --bg: #1e1e2f; /* Fallback color for body */
+            --bg: #1e1e2f;
+            /* Fallback color for body */
             --bg-image: url('https://Usuy-Leon.github.io/home.github.io/Imagenes/🌙_Dark_mode_edition.jpg.jpg');
             --btn-bg: rgba(50, 50, 70, 0.7);
             --btn-border: rgba(255, 255, 255, 0.12);
-            --text-shadow: 0 0 4px rgba(0, 0, 0, 0.5), 0 0 2px rgba(255, 255, 255, 0.1); /* clarity for text */
+            --text-shadow: 0 0 4px rgba(0, 0, 0, 0.5), 0 0 2px rgba(255, 255, 255, 0.1);
+            /* clarity for text */
         }
-        
+
         body {
             /* Background image application */
-            background-color: var(--bg); /* Fallback/underlay color */
+            background-color: var(--bg);
+            /* Fallback/underlay color */
             background-image: var(--bg-image);
-            background-size: cover; /* Ensures image covers the entire viewport */
-            background-attachment: fixed; /* Keeps image fixed when scrolling */
-            background-position: center; /* Centers the image */
-            transition: background-image 0.5s, background-color 0.5s, color 0.5s; /* Apply transition to image and color */
+            background-size: cover;
+            /* Ensures image covers the entire viewport */
+            background-attachment: fixed;
+            /* Keeps image fixed when scrolling */
+            background-position: center;
+            /* Centers the image */
+            transition: background-image 0.5s, background-color 0.5s, color 0.5s;
+            /* Apply transition to image and color */
 
             color: var(--fg);
             min-height: 100vh;
@@ -69,52 +81,64 @@
             width: 100%;
             margin-bottom: 30px;
             letter-spacing: 2px;
-            text-align: center;/* Make space for the fixed button */
+            text-align: center;
+            /* Make space for the fixed button */
         }
 
         /* New: Centering the Content */
         .header-content {
-            display: flex; /* Use flexbox */
+            display: flex;
+            /* Use flexbox */
             flex-direction: column;
-            align-items: center; /* Center horizontally */
+            align-items: center;
+            /* Center horizontally */
             text-align: center;
             text-transform: uppercase;
-    
-        /* Calculate the offset to perfectly center the text */
-            margin-left: 100px; /* A calculated offset to visually balance the fixed button on the right */
-            margin-right: 20px; /* Counteracts the margin-left offset */
+
+            /* Calculate the offset to perfectly center the text */
+            margin-left: 100px;
+            /* A calculated offset to visually balance the fixed button on the right */
+            margin-right: 20px;
+            /* Counteracts the margin-left offset */
         }
+
         header h1 {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 5px;
             color: var(--fg);
-            text-shadow: var(--text-shadow); /* Apply text shadow for clarity over image */
+            text-shadow: var(--text-shadow);
+            /* Apply text shadow for clarity over image */
         }
 
         header h2 {
             font-size: 1.3rem;
             font-weight: 400;
-            color: var(--fg); /* Use theme variable */
+            color: var(--fg);
+            /* Use theme variable */
             opacity: 0.8;
             font-style: italic;
-            text-shadow: var(--text-shadow); /* Apply text shadow for clarity over image */
+            text-shadow: var(--text-shadow);
+            /* Apply text shadow for clarity over image */
         }
 
         /* --- 3. Dark Mode Toggle Button (Fixes Applied) --- */
         #darkModeToggle {
-            
-            position: fixed;
-            top: 80px; /* Adjusted to align with the H1/H2 height */
-            right: 20px; /* Distance from the right */
-            z-index: 1000;
+            /* Removed fixed positioning to allow flex layout in #fixedActions */
+            /* position: fixed; */
+            /* top: 80px; */
+            /* right: 20px; */
+            /* z-index: 1000; */
 
             /* Size Adjustment (Increased padding/font-size) */
-            padding: 0.5rem 1rem; /* Increased size */
-            font-size: 1.2rem; /* Increased font size */
-            
+            padding: 0.5rem 1rem;
+            /* Increased size */
+            font-size: 1.2rem;
+            /* Increased font size */
+
             /* Your requested button styles */
-            border-radius: 999px; /* Circular/pill shape */
+            border-radius: 999px;
+            /* Circular/pill shape */
             border: 1px solid var(--btn-border);
             background: var(--btn-bg);
             backdrop-filter: blur(10px);
@@ -125,10 +149,12 @@
             transition: background 0.3s, border-color 0.3s, color 0.3s;
             text-shadow: none;
             outline: none;
-            display: flex; /* Centers the icon */
+            display: flex;
+            /* Centers the icon */
             align-items: center;
             justify-content: center;
         }
+
         /* ============================================================
         FIXED ACTIONS CONTAINER (Scroll-Hide Menu)
         ============================================================ */
@@ -137,17 +163,18 @@
             top: 20px;
             right: 20px;
             z-index: 999;
-            display: flex; 
+            display: flex;
             flex-direction: column;
-            gap: 10px; 
-            transition: transform 0.4s ease-out, opacity 0.4s; 
+            gap: 10px;
+            transition: transform 0.4s ease-out, opacity 0.4s;
         }
 
 
         #fixedActions.hidden {
-            transform: translateX(80px); 
+            transform: translateX(80px);
             opacity: 0;
-            pointer-events: none; /* Prevents interaction when hidden */
+            pointer-events: none;
+            /* Prevents interaction when hidden */
         }
 
         #fixedActions button {
@@ -162,7 +189,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             transition: background 0.2s, color 0.2s, box-shadow 0.2s;
         }
 
@@ -173,7 +200,7 @@
 
         #fixedActions button:hover {
             filter: brightness(1.2);
-            box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
         }
 
         /* --- Filter Buttons --- */
@@ -181,16 +208,19 @@
             margin-bottom: 40px;
             display: flex;
             justify-content: center;
-            gap: 10px; /* Reduced gap slightly */
+            gap: 10px;
+            /* Reduced gap slightly */
             flex-wrap: wrap;
         }
 
         .filter-btn {
             /* Applied circular design and theme variables */
             padding: 0.5rem 1rem;
-            border-radius: 999px; /* Making it circular/pill shaped */
+            border-radius: 999px;
+            /* Making it circular/pill shaped */
             border: 1px solid var(--btn-border);
-            background: var(--btn-bg); /* Using the semi-transparent background */
+            background: var(--btn-bg);
+            /* Using the semi-transparent background */
             color: var(--fg);
             font-family: var(--font-serif);
             text-transform: uppercase;
@@ -198,11 +228,14 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.9rem;
-            backdrop-filter: blur(5px); /* Added subtle blur for consistency */
+            backdrop-filter: blur(5px);
+            /* Added subtle blur for consistency */
         }
 
-        .filter-btn:hover, .filter-btn.active {
-            color: var(--bg); /* Inverted colors on hover/active */
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: var(--bg);
+            /* Inverted colors on hover/active */
             border-color: var(--fg);
             background: var(--fg);
         }
@@ -210,10 +243,14 @@
         /* --- Gallery Grid Layout (Spacing Fix) --- */
         .gallery-container {
             /* To ensure content is readable over the image, add a subtle background */
-            background: rgba(0, 0, 0, 0.05); /* Very light overlay in light mode */
+            background: rgba(0, 0, 0, 0.05);
+
+            /* Very light overlay in light mode */
             .dark-mode & {
-                background: rgba(255, 255, 255, 0.05); /* Very dark overlay in dark mode */
+                background: rgba(255, 255, 255, 0.05);
+                /* Very dark overlay in dark mode */
             }
+
             max-width: 1600px;
             margin: 0 auto;
             margin-top: 30px;
@@ -229,7 +266,7 @@
             cursor: pointer;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
-        
+
         .gallery-item.hide {
             display: none;
         }
@@ -243,7 +280,8 @@
             aspect-ratio: 1 / 1;
             overflow: hidden;
             margin-bottom: 15px;
-            border: 1px solid var(--btn-border); /* Used theme variable */
+            border: 1px solid var(--btn-border);
+            /* Used theme variable */
         }
 
         .gallery-item img {
@@ -261,41 +299,43 @@
 
         .album-artist {
             font-weight: 700;
-            color: var(--fg); /* Used theme variable */
+            color: var(--fg);
+            /* Used theme variable */
             opacity: 0.9;
             margin-bottom: 4px;
         }
 
         .album-title {
-            color: var(--fg); /* Used theme variable */
+            color: var(--fg);
+            /* Used theme variable */
             opacity: 0.5;
             font-style: italic;
         }
-        
+
 
         /* --- Lightbox Modal Styling (No changes needed) --- */
         .modal {
             display: none;
-            position: fixed; 
-            z-index: 1000; 
+            position: fixed;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.95);
+            background-color: rgba(0, 0, 0, 0.95);
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
         .modal-image-container {
-             position: relative;
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             width: 90%;
-             height: 70%;
-             overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 95%;
+            height: 90%;
+            overflow: hidden;
         }
 
         .modal-content {
@@ -326,10 +366,10 @@
             transform: translateY(0);
             transition: transform 0.3s ease;
         }
-        
+
         /* Hide description when zoomed to see details */
-        .modal-content.zoomed + .description-overlay {
-            transform: translateY(100%); 
+        .modal-content.zoomed+.description-overlay {
+            transform: translateY(100%);
         }
 
         .desc-text {
@@ -358,10 +398,10 @@
             font-family: 'Lora', serif;
             transition: background-color 0.2s;
         }
-        
+
         .control-btn:hover {
-             background-color: rgba(255, 255, 255, 0.3);
-             border-color: #fff;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
         }
 
         .close-btn-top {
@@ -372,39 +412,170 @@
             font-size: 40px;
             cursor: pointer;
             z-index: 1002;
-            font-family: sans-serif;
+
         }
-    
+
+        /* --- Zoom Lens Styling --- */
+        .zoom-lens {
+            position: absolute;
+            border: 3px solid #d4d4d4;
+            /*set the size of the lens:*/
+            width: 250px;
+            height: 250px;
+            border-radius: 5px;
+            cursor: none;
+            /*set the background image for the lens:*/
+            background-repeat: no-repeat;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+            /* Hidden by default */
+            z-index: 1003;
+            /* Above everything else in modal */
+            pointer-events: none;
+            /* Let clicks pass through if needed, though we track mouse on container */
+        }
+
+        /* Update Zoom Button to be circular and use icon */
+        #zoomBtn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* --- Info Panels --- */
+        .info-panel {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            color: #fff;
+            display: none;
+            z-index: 1002;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .info-panel.left {
+            left: 20px;
+        }
+
+        .info-panel.right {
+            right: 20px;
+        }
+
+        .info-panel h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .metadata-item {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .metadata-label {
+            font-weight: bold;
+            color: #ccc;
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        #histogramCanvas {
+            width: 100%;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
         /* --- Responsive --- */
         @media only screen and (max-width: 768px) {
-            .gallery-container { grid-template-columns: 1fr; }
-            #darkModeToggle { top: 30px; right: 10px; } /* Adjust position on smaller screens */
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            @media (max-width: 768px) {
+                .modal-content {
+                    width: 95%;
+                    height: 90%;
+                }
+
+                .header-content {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                .info-panel {
+                    width: 90%;
+                    left: 5% !important;
+                    right: 5% !important;
+                    transform: none;
+                    padding: 15px;
+                }
+
+                .info-panel.left {
+                    top: 80px;
+                    /* Below header */
+                    bottom: auto;
+                }
+
+                .info-panel.right {
+                    top: auto;
+                    bottom: 100px;
+                    /* Above controls */
+                }
+            }
+
+            /* Reset margins for mobile centering */
         }
+
         @media only screen and (max-width: 480px) {
-            .gallery-container { grid-template-columns: 1fr; }
-            header h1 { font-size: 1.8rem; }
-            .desc-text { font-size: 0.9rem; }
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .desc-text {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
+
 <body>
-<div id="fixedActions">
+    <div id="fixedActions">
         <!-- Home BUTTON -->
-    <button id="Home" title="Home" onclick="window.location.href='https://usuy-leon.github.io/home.github.io/';">
-        <i class="fa fa-home" aria-hidden="true"></i>
-    </button>
-    
-    <button id="darkModeToggle" aria-label="Toggle dark mode">
-        <i class="fas fa-moon"></i>
-    </button>
-</div>
-    <header>
-    <div class="header-content"> 
-        <h1>MicroWorld</h1>
-        <h2>My personal gallery of the unseen</h2>
+        <button id="Home" title="Home" onclick="window.location.href='https://usuy-leon.github.io/home.github.io/';">
+            <i class="fa fa-home" aria-hidden="true"></i>
+        </button>
+
+        <button id="darkModeToggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+        </button>
     </div>
+    <header>
+        <div class="header-content">
+            <h1>MicroWorld</h1>
+            <h2>My personal gallery of the unseen</h2>
+        </div>
     </header>
-  
+
     <div class="filter-container">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="Fish">Fish</button>
@@ -413,8 +584,9 @@
     </div>
 
     <main class="gallery-container">
-        
-        <div class="gallery-item" data-category="Fish" data-description="A hauntingly beautiful choral composition composed by Arvo Pärt in 2004.">
+
+        <div class="gallery-item" data-category="Fish"
+            data-description="A hauntingly beautiful choral composition composed by Arvo Pärt in 2004.">
             <div class="image-wrapper">
                 <img src="https://picsum.photos/id/1025/500/500" alt="Arvo Part">
             </div>
@@ -424,8 +596,9 @@
             </div>
         </div>
 
-        <div class="gallery-item" data-category="Lizards" data-description="An improvised harp session recorded in a cavernous hall, exploring resonance and silence.">
-             <div class="image-wrapper">
+        <div class="gallery-item" data-category="Lizards"
+            data-description="An improvised harp session recorded in a cavernous hall, exploring resonance and silence.">
+            <div class="image-wrapper">
                 <img src="https://picsum.photos/id/1016/500/500" alt="Unknown">
             </div>
             <div class="album-info">
@@ -434,8 +607,9 @@
             </div>
         </div>
 
-        <div class="gallery-item" data-category="Lizards" data-description="Traditional Gamelan music featuring bronze percussion instruments from Indonesia.">
-             <div class="image-wrapper">
+        <div class="gallery-item" data-category="Lizards"
+            data-description="Traditional Gamelan music featuring bronze percussion instruments from Indonesia.">
+            <div class="image-wrapper">
                 <img src="https://picsum.photos/id/1082/500/500" alt="Lou Harrison">
             </div>
             <div class="album-info">
@@ -444,8 +618,9 @@
             </div>
         </div>
 
-         <div class="gallery-item" data-category="Planaria" data-description="Rare violle pieces from the 17th century French Baroque period.">
-             <div class="image-wrapper">
+        <div class="gallery-item" data-category="Planaria"
+            data-description="Rare violle pieces from the 17th century French Baroque period.">
+            <div class="image-wrapper">
                 <img src="https://picsum.photos/id/1069/500/500" alt="M de Machy">
             </div>
             <div class="album-info">
@@ -454,8 +629,9 @@
             </div>
         </div>
 
-        <div class="gallery-item" data-category="Planaria" data-description="Ceremonial music reimagined through modern experimental orchestration.">
-             <div class="image-wrapper">
+        <div class="gallery-item" data-category="Planaria"
+            data-description="Ceremonial music reimagined through modern experimental orchestration.">
+            <div class="image-wrapper">
                 <img src="https://picsum.photos/id/1033/500/500" alt="Royal Orchestra">
             </div>
             <div class="album-info">
@@ -464,11 +640,12 @@
             </div>
         </div>
 
-        <div class="gallery-item" data-category="Fish" data-description="A visual and auditory journey through the domestic lives of the 17th century Dutch Masters.">
-             <div class="image-wrapper">
+        <div class="gallery-item" data-category="Fish"
+            data-description="A visual and auditory journey through the domestic lives of the 17th century Dutch Masters.">
+            <div class="image-wrapper">
                 <img src="https://picsum.photos/id/1059/500/500" alt="Dutch Masters">
             </div>
-             <div class="album-info">
+            <div class="album-info">
                 <div class="album-artist">Fish</div>
                 <div class="album-title">INDOOR SCENES</div>
             </div>
@@ -478,17 +655,34 @@
 
     <div id="myModal" class="modal">
         <span class="close-btn-top">&times;</span>
-        
+
         <div class="modal-image-container">
             <img class="modal-content" id="img01">
             <div class="description-overlay">
                 <p class="desc-text" id="modalDescText"></p>
             </div>
         </div>
-        
+
+        <!-- Metadata Panel (Left) -->
+        <div class="info-panel left" id="metadataPanel">
+            <h3>Image Details</h3>
+            <div id="metadataContent"></div>
+        </div>
+
+        <!-- Histogram Panel (Right) -->
+        <div class="info-panel right" id="histogramPanel">
+            <h3>RGB Histogram</h3>
+            <canvas id="histogramCanvas"></canvas>
+        </div>
+
         <div class="controls-container">
-             <button id="zoomBtn" class="control-btn">Zoom</button>
-             <button id="closeBtnBottom" class="control-btn">Close</button>
+            <button id="metadataBtn" class="control-btn" title="Metadata"
+                style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center;"><i
+                    class="fas fa-info"></i></button>
+            <button id="zoomBtn" class="control-btn" title="Zoom"><i class="fas fa-search-plus"></i></button>
+            <button id="histogramBtn" class="control-btn" title="Histogram"
+                style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center;"><i
+                    class="fas fa-chart-bar"></i></button>
         </div>
     </div>
 
@@ -537,7 +731,7 @@
         } else if (savedTheme === null) {
             // 2. If no saved preference, check the system preference
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                 body.classList.add('dark-mode');
+                body.classList.add('dark-mode');
             }
         }
 
@@ -556,29 +750,66 @@
             // Update the icon
             updateIcon();
         });
- 
+
         // --- MODAL FUNCTIONALITY ---
         const modal = document.getElementById("myModal");
         const modalImg = document.getElementById("img01");
         const modalDescText = document.getElementById("modalDescText");
         const closeBtnTop = document.querySelector(".close-btn-top");
-        const closeBtnBottom = document.getElementById("closeBtnBottom");
         const zoomBtn = document.getElementById("zoomBtn");
+        const metadataBtn = document.getElementById("metadataBtn");
+        const histogramBtn = document.getElementById("histogramBtn");
+        const metadataPanel = document.getElementById("metadataPanel");
+        const histogramPanel = document.getElementById("histogramPanel");
+        const metadataContent = document.getElementById("metadataContent");
+        const histogramCanvas = document.getElementById("histogramCanvas");
         let isZoomed = false;
 
         // Open Modal
         galleryItems.forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 const img = this.querySelector('img');
                 const description = this.getAttribute('data-description');
+                const artist = this.querySelector('.album-artist').textContent;
+                const title = this.querySelector('.album-title').textContent;
+                const category = this.getAttribute('data-category');
 
                 modal.style.display = "flex";
+                modalImg.crossOrigin = "Anonymous"; // Enable CORS for histogram
                 modalImg.src = img.src;
                 modalDescText.textContent = description;
-                
+
+                // --- CODE NOTE: How to Add More Metadata ---
+                // To add more metadata fields:
+                // 1. Ensure the data is available in the HTML element (e.g., as a data-attribute or child element).
+                // 2. Extract the data in the 'click' event listener below.
+                // 3. Add a new line to the `metadataContent.innerHTML` template string.
+                // Example:
+                // const year = this.getAttribute('data-year');
+                // <div class="metadata-item"><span class="metadata-label">Year</span>${year}</div>
+                // ------------------------------------------------
+
+                // Populate Metadata
+                metadataContent.innerHTML = `
+                    <div class="metadata-item"><span class="metadata-label">Artist</span>${artist}</div>
+                    <div class="metadata-item"><span class="metadata-label">Title</span>${title}</div>
+                    <div class="metadata-item"><span class="metadata-label">Category</span>${category}</div>
+                    <div class="metadata-item"><span class="metadata-label">Dimensions</span><span id="metaDims">Loading...</span></div>
+                `;
+
+                modalImg.onload = function () {
+                    document.getElementById('metaDims').textContent = `${this.naturalWidth} x ${this.naturalHeight} px`;
+                };
+
                 resetZoom();
+                hidePanels();
             });
         });
+
+        function hidePanels() {
+            metadataPanel.style.display = "none";
+            histogramPanel.style.display = "none";
+        }
 
         // Close Functions
         function closeModal() {
@@ -587,30 +818,220 @@
         }
 
         closeBtnTop.onclick = closeModal;
-        closeBtnBottom.onclick = closeModal;
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal();
         });
 
-        // Zoom Functions
+        // Zoom Functions (Loupe)
+        let lens;
+        let cx, cy;
+
         function resetZoom() {
             isZoomed = false;
-            modalImg.classList.remove("zoomed");
-            zoomBtn.textContent = "Zoom In";
+            // Remove lens if it exists
+            if (lens) {
+                lens.remove();
+                lens = null;
+            }
+            // Remove event listeners
+            modalImg.removeEventListener("mousemove", moveLens);
+            modalImg.removeEventListener("touchmove", moveLens);
+
+            // Reset button icon
+            zoomBtn.innerHTML = '<i class="fas fa-search-plus"></i>';
+
+            // Show overlay again
+            const overlay = document.querySelector('.description-overlay');
+            if (overlay) overlay.style.display = "block";
+        }
+
+        function moveLens(e) {
+            e.preventDefault();
+            const pos = getCursorPos(e);
+
+            // Calculate position of lens (relative to image)
+            let x = pos.x - (lens.offsetWidth / 2);
+            let y = pos.y - (lens.offsetHeight / 2);
+
+            // Prevent lens from being positioned outside the image
+            if (x > modalImg.width - lens.offsetWidth) { x = modalImg.width - lens.offsetWidth; }
+            if (x < 0) { x = 0; }
+            if (y > modalImg.height - lens.offsetHeight) { y = modalImg.height - lens.offsetHeight; }
+            if (y < 0) { y = 0; }
+
+            // Set lens position (relative to container, so add image offset)
+            lens.style.left = (x + modalImg.offsetLeft) + "px";
+            lens.style.top = (y + modalImg.offsetTop) + "px";
+
+            // Display what the lens "sees"
+            // To perfectly match, we need to calculate where the center of the lens is relative to the image
+            // and map that to the zoomed image.
+            // Lens center relative to image:
+            const lensCX = x + (lens.offsetWidth / 2);
+            const lensCY = y + (lens.offsetHeight / 2);
+
+            // Background position:
+            // We want the point (lensCX, lensCY) on the original image to be at the center of the lens.
+            // The background image is scaled by cx, cy.
+            // So the point on the background image is (lensCX * cx, lensCY * cy).
+            // We want this point to be at the center of the lens (lens.offsetWidth/2, lens.offsetHeight/2).
+            // So background-position-x = (lens.offsetWidth/2) - (lensCX * cx)
+            // But standard background-position is negative to move the image left/up.
+
+            lens.style.backgroundPosition = "-" + ((lensCX * cx) - lens.offsetWidth / 2) + "px -" + ((lensCY * cy) - lens.offsetHeight / 2) + "px";
+        }
+
+        function getCursorPos(e) {
+            let a, x = 0, y = 0;
+            e = e || window.event;
+            /* Get the x and y positions of the image: */
+            a = modalImg.getBoundingClientRect();
+            /* Calculate the cursor's x and y coordinates, relative to the image: */
+            x = e.pageX - a.left;
+            y = e.pageY - a.top;
+            /* Consider any page scrolling: */
+            x = x - window.pageXOffset;
+            y = y - window.pageYOffset;
+            return { x: x, y: y };
         }
 
         zoomBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             isZoomed = !isZoomed;
-            
+
             if (isZoomed) {
-                modalImg.classList.add("zoomed");
-                zoomBtn.textContent = "Zoom Out";
+                // Create lens
+                lens = document.createElement("DIV");
+                lens.setAttribute("class", "zoom-lens");
+
+                // Insert lens before the image
+                modalImg.parentElement.insertBefore(lens, modalImg);
+
+                // Calculate ratio
+                // Assuming 2x zoom for the lens
+                const zoomLevel = 2;
+
+                // We need the actual natural dimensions of the image to do high-res zoom if possible,
+                // but for simplicity we will just scale the current image source
+
+                lens.style.backgroundImage = "url('" + modalImg.src + "')";
+
+                // Calculate ratio between lens and image
+                // We want the background size to be (image width * zoom) x (image height * zoom)
+                cx = zoomLevel;
+                cy = zoomLevel;
+
+                lens.style.backgroundSize = (modalImg.width * cx) + "px " + (modalImg.height * cy) + "px";
+
+                // Show lens
+                lens.style.display = "block";
+
+                // Add listeners
+                modalImg.addEventListener("mousemove", moveLens);
+                lens.addEventListener("mousemove", moveLens);
+
+                modalImg.addEventListener("touchmove", moveLens);
+                lens.addEventListener("touchmove", moveLens);
+
+                // Change icon
+                zoomBtn.innerHTML = '<i class="fas fa-search-minus"></i>';
+
+                // Hide description overlay to clear view
+                const overlay = document.querySelector('.description-overlay');
+                if (overlay) overlay.style.display = "none";
+
             } else {
-                modalImg.classList.remove("zoomed");
-                zoomBtn.textContent = "Zoom In";
+                resetZoom();
             }
         });
+
+        // --- Metadata Toggle ---
+        metadataBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (metadataPanel.style.display === "block") {
+                metadataPanel.style.display = "none";
+            } else {
+                metadataPanel.style.display = "block";
+            }
+        });
+
+        // --- Histogram Toggle & Logic ---
+        histogramBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (histogramPanel.style.display === "block") {
+                histogramPanel.style.display = "none";
+            } else {
+                histogramPanel.style.display = "block";
+                generateHistogram();
+            }
+        });
+
+        function generateHistogram() {
+            const ctx = histogramCanvas.getContext('2d');
+            const width = histogramCanvas.width = 300;
+            const height = histogramCanvas.height = 180; // Increased height for labels
+            const graphHeight = 150;
+
+            ctx.clearRect(0, 0, width, height);
+
+            // Create a temporary canvas to read pixel data
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = modalImg.naturalWidth;
+            tempCanvas.height = modalImg.naturalHeight;
+
+            try {
+                tempCtx.drawImage(modalImg, 0, 0, tempCanvas.width, tempCanvas.height);
+                const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height).data;
+
+                const rCount = new Array(256).fill(0);
+                const gCount = new Array(256).fill(0);
+                const bCount = new Array(256).fill(0);
+                let maxCount = 0;
+
+                for (let i = 0; i < imageData.length; i += 4) {
+                    rCount[imageData[i]]++;
+                    gCount[imageData[i + 1]]++;
+                    bCount[imageData[i + 2]]++;
+                }
+
+                maxCount = Math.max(...rCount, ...gCount, ...bCount);
+
+                // Draw Histogram
+                ctx.globalCompositeOperation = 'screen';
+
+                drawChannel(ctx, rCount, maxCount, 'rgba(255, 0, 0, 0.6)', width, graphHeight);
+                drawChannel(ctx, gCount, maxCount, 'rgba(0, 255, 0, 0.6)', width, graphHeight);
+                drawChannel(ctx, bCount, maxCount, 'rgba(0, 0, 255, 0.6)', width, graphHeight);
+
+                // Draw Scale Numbers
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.fillStyle = "#ccc";
+                ctx.font = "10px sans-serif";
+                ctx.textAlign = "left";
+                ctx.fillText("0", 0, height - 10);
+                ctx.textAlign = "center";
+                ctx.fillText("128", width / 2, height - 10);
+                ctx.textAlign = "right";
+                ctx.fillText("255", width, height - 10);
+
+            } catch (err) {
+                console.error("Histogram error (likely CORS):", err);
+                ctx.fillStyle = "white";
+                ctx.font = "14px sans-serif";
+                ctx.fillText("Cannot load histogram (CORS)", 10, 50);
+            }
+        }
+
+        function drawChannel(ctx, data, max, color, width, height) {
+            ctx.fillStyle = color;
+            const barWidth = width / 256;
+            for (let i = 0; i < 256; i++) {
+                const barHeight = (data[i] / max) * height;
+                ctx.fillRect(i * barWidth, height - barHeight, barWidth, barHeight);
+            }
+        }
     </script>
 </body>
+
 </html>
