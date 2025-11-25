@@ -795,17 +795,18 @@
     <div id="myModal" class="modal">
         <span class="close-btn-top">&times;</span>
 
-        <div class="modal-content">
-            <img id="modalImg" src="" alt="Zoomed Image">
-            <video id="modalVideo" loop playsinline muted
+        <div class="modal-image-container">
+            <img id="modalImg" class="modal-content" src="" alt="Zoomed Image">
+            <video id="modalVideo" class="modal-content" loop playsinline muted
                 style="display: none; width: 100%; height: 100%; object-fit: contain;"></video>
             <div class="zoom-lens">
                 <canvas id="zoomCanvas" width="250" height="250"
                     style="display: none; width: 100%; height: 100%;"></canvas>
             </div>
-            <div class="description-overlay">
-                <p class="desc-text" id="modalDescText"></p>
-            </div>
+        </div>
+
+        <div class="description-overlay">
+            <p class="desc-text" id="modalDescText"></p>
         </div>
 
         <!-- Metadata Panel (Left) -->
