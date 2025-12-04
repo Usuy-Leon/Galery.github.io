@@ -1,2 +1,2 @@
 # Galery.github.io
-This repo host my personal Galery. As protafolio but also as a microscopy showcase hobby.
+This repo host my personal Galery.  A potafolio but also as a hobby of microscopy images.
